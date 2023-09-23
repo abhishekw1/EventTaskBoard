@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-header>
+    Add New User
+    <mat-card-title></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="add-user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>User Name</mat-label>
+        <input matInput placeholder="Enter a Name" formControlName="name" name="name" />
+      </mat-form-field>
+      <button mat-raised-button>Add User</button>
+    </form>
+  </mat-card-content>
+</mat-card>

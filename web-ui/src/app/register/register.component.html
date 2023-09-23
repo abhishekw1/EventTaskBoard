@@ -1,0 +1,67 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Register</mat-card-title>
+  </mat-card-header>
+  <br>
+  <mat-card-content>
+    <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput name="name" formControlName="name">
+        <mat-error *ngIf="registerForm.controls['name'].hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email"  name="email"
+               placeholder="Ex. pat@example.com">
+        <mat-error *ngIf="registerForm.controls['email'].hasError('email') && !registerForm.controls['email'].hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-radio-group aria-label="Select an option" formControlName="roleType">
+        <mat-radio-button value="Admin">Admin</mat-radio-button>
+        <mat-radio-button value="User">User</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field class="full-width" *ngIf="registerForm.value.roleType ==='Admin'">
+        <mat-label>Enter Admin Code</mat-label>
+        <input matInput formControlName="adminCode" name="adminCode">
+        <mat-error *ngIf="registerForm.controls['adminCode'].hasError('required')">
+          AdminCode is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" matTooltip="Password rules - at least one of each:
+      A-Z ,
+      a-z ,
+      0-9 ,
+      #?!@$%^&*-">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password"  name="password">
+        <mat-error *ngIf="registerForm.controls['password'].hasError('pattern') && !registerForm.controls['password'].hasError('required')">
+          Please enter a valid Password 
+        </mat-error>
+        <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" matInput formControlName="confirmpassword"  name="confirmpassword">
+        <mat-error *ngIf="registerForm.controls['confirmpassword'].hasError('pattern') && !registerForm.controls['confirmpassword'].hasError('required')">
+          Please enter a valid Password 
+        </mat-error>
+        <mat-error *ngIf="registerForm.controls['confirmpassword'].hasError('required')">
+          Confirm Your Password
+        </mat-error>
+      </mat-form-field>
+      <mat-error *ngIf="registerForm.errors?.mismatchedFeilds">
+        Password do not match
+      </mat-error>
+      <button mat-raised-button color="primary" [disabled]="registerForm.invalid">register</button>
+    </form>
+  </mat-card-content>
+</mat-card>
